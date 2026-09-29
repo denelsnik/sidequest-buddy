@@ -1,292 +1,35 @@
 ```javascript
-// ========================================
-// SIDEQUEST BUDDY
-// Interactive Invitation
-// ========================================
-
-
-// ========================================
-// GOOGLE SHEETS TRACKING
-// ========================================
-
-const GOOGLE_SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbwLpWFltwVOcDLr9h8DqVZvZosf4E9snvw70979gxRkM0FDVlA__kL5nLnhQ6zLPKfOCA/exec";
-
-
-// ========================================
-// PLAYER
-// ========================================
-
-const guestName = "Alexandru";
-
-
-// ========================================
-// TRACKING DATA
-// ========================================
-
-let decision = "";
-let question1Answer = "";
-let question2Answer = "";
-let selectedSidequest = "";
-
-
-// ========================================
-// INITIALIZE
-// ========================================
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const guestElement = document.getElementById("guestName");
-
-    if (guestElement) {
-        guestElement.textContent = guestName;
-    }
-
-});
-
-
-// ========================================
-// SCREEN HELPER
-// ========================================
-
-function showScreen(screenId) {
-
-    const screens = document.querySelectorAll(".screen");
-
-    screens.forEach(function (screen) {
-        screen.classList.add("hidden");
-    });
-
-    const targetScreen = document.getElementById(screenId);
-
-    if (targetScreen) {
-        targetScreen.classList.remove("hidden");
-    }
-
-}
-
-
-// ========================================
-// START QUEST
-// ========================================
+alert("SCRIPT.JS WIRD GELADEN!");
 
 function acceptQuest() {
-
-    decision = "YES";
-
-    showScreen("yesScreen");
-
+    alert("ACCEPT QUEST funktioniert!");
 }
-
-
-// ========================================
-// DECLINE QUEST
-// ========================================
 
 function rejectQuest() {
-
-    decision = "NO";
-
-    showScreen("noScreen");
-
+    alert("DECLINE funktioniert!");
 }
-
-
-// ========================================
-// TRY AGAIN
-// ========================================
 
 function resetQuest() {
-
-    decision = "";
-    question1Answer = "";
-    question2Answer = "";
-    selectedSidequest = "";
-
-    showScreen("mainChoices");
-
+    alert("RETRY funktioniert!");
 }
-
-
-// ========================================
-// START QUIZ
-// ========================================
 
 function startQuiz() {
-
-    showScreen("question1");
-
+    alert("BEGIN TEST funktioniert!");
 }
-
-
-// ========================================
-// QUESTION 1
-// ========================================
 
 function answerQuestion1(answer) {
-
-    const feedback =
-        document.getElementById("question1Feedback");
-
-    question1Answer =
-        answer ? "C" : "INCORRECT";
-
-
-    if (answer) {
-
-        feedback.textContent =
-            "> CORRECT. Proceeding...";
-
-        feedback.className =
-            "quiz-feedback correct";
-
-        setTimeout(function () {
-
-            showScreen("question2");
-
-        }, 700);
-
-    } else {
-
-        feedback.textContent =
-            "> INCORRECT. Try again, genius.";
-
-        feedback.className =
-            "quiz-feedback incorrect";
-
-    }
-
+    alert("FRAGE 1 funktioniert! Antwort: " + answer);
 }
-
-
-// ========================================
-// QUESTION 2
-// ========================================
 
 function answerQuestion2(answer) {
-
-    const feedback =
-        document.getElementById("question2Feedback");
-
-    question2Answer =
-        answer ? "C" : "INCORRECT";
-
-
-    if (answer) {
-
-        feedback.textContent =
-            "> CORRECT. Compatibility confirmed.";
-
-        feedback.className =
-            "quiz-feedback correct";
-
-        setTimeout(function () {
-
-            showScreen("passedScreen");
-
-        }, 800);
-
-    } else {
-
-        feedback.textContent =
-            "> INCORRECT. Think harder.";
-
-        feedback.className =
-            "quiz-feedback incorrect";
-
-    }
-
+    alert("FRAGE 2 funktioniert! Antwort: " + answer);
 }
-
-
-// ========================================
-// SHOW SIDEQUESTS
-// ========================================
 
 function showSidequests() {
-
-    showScreen("sidequestScreen");
-
+    alert("ACCESS SIDEQUESTS funktioniert!");
 }
-
-
-// ========================================
-// CHOOSE SIDEQUEST
-// ========================================
 
 function chooseActivity(activity) {
-
-    selectedSidequest = activity;
-
-    const selectedActivityElement =
-        document.getElementById("selectedActivity");
-
-    if (selectedActivityElement) {
-        selectedActivityElement.textContent = activity;
-    }
-
-
-    // Save to Google Sheets
-    // ONLY after a Sidequest has been selected.
-    saveResponse();
-
-
-    // Show final screen immediately
-    showScreen("resultScreen");
-
-}
-
-
-// ========================================
-// SAVE TO GOOGLE SHEETS
-// ========================================
-
-async function saveResponse() {
-
-    const data = {
-
-        name: guestName,
-
-        decision: decision,
-
-        question1: question1Answer,
-
-        question2: question2Answer,
-
-        sidequest: selectedSidequest
-
-    };
-
-
-    console.log("Sending response:", data);
-
-
-    try {
-
-        await fetch(GOOGLE_SCRIPT_URL, {
-
-            method: "POST",
-
-            mode: "no-cors",
-
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-
-            body: JSON.stringify(data)
-
-        });
-
-        console.log("Response sent to Google Sheets.");
-
-    } catch (error) {
-
-        console.error(
-            "Could not send response to Google Sheets:",
-            error
-        );
-
-    }
-
+    alert("SIDEQUEST funktioniert: " + activity);
 }
 ```
