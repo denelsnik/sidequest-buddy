@@ -1,37 +1,226 @@
 ```javascript
-// TEST - SIDEQUEST BUDDY
+// ========================================
+// SIDEQUEST BUDDY
+// Interactive Invitation
+// ========================================
 
-alert("SCRIPT.JS WIRD GELADEN!");
+
+// ========================================
+// PLAYER
+// ========================================
+
+const guestName = "Alexandru";
+
+
+// ========================================
+// TRACKING DATA
+// ========================================
+
+let decision = "";
+let question1Answer = "";
+let question2Answer = "";
+let selectedSidequest = "";
+
+
+// ========================================
+// INITIALIZE
+// ========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const guestElement = document.getElementById("guestName");
+
+    if (guestElement) {
+        guestElement.textContent = guestName;
+    }
+
+});
+
+
+// ========================================
+// SCREEN HELPER
+// ========================================
+
+function showScreen(screenId) {
+
+    const screens = document.querySelectorAll(".screen");
+
+    screens.forEach(function (screen) {
+        screen.classList.add("hidden");
+    });
+
+    const targetScreen = document.getElementById(screenId);
+
+    if (targetScreen) {
+        targetScreen.classList.remove("hidden");
+    }
+
+}
+
+
+// ========================================
+// START QUEST
+// ========================================
 
 function acceptQuest() {
-    alert("ACCEPT QUEST funktioniert!");
+
+    decision = "YES";
+
+    showScreen("yesScreen");
+
 }
+
+
+// ========================================
+// DECLINE QUEST
+// ========================================
 
 function rejectQuest() {
-    alert("DECLINE funktioniert!");
+
+    decision = "NO";
+
+    showScreen("noScreen");
+
 }
+
+
+// ========================================
+// TRY AGAIN
+// ========================================
 
 function resetQuest() {
-    alert("RETRY funktioniert!");
+
+    decision = "";
+    question1Answer = "";
+    question2Answer = "";
+    selectedSidequest = "";
+
+    showScreen("mainChoices");
+
 }
+
+
+// ========================================
+// START QUIZ
+// ========================================
 
 function startQuiz() {
-    alert("BEGIN TEST funktioniert!");
+
+    showScreen("question1");
+
 }
+
+
+// ========================================
+// QUESTION 1
+// ========================================
 
 function answerQuestion1(answer) {
-    alert("FRAGE 1 funktioniert! Antwort: " + answer);
+
+    const feedback =
+        document.getElementById("question1Feedback");
+
+    question1Answer =
+        answer ? "C" : "INCORRECT";
+
+
+    if (answer) {
+
+        feedback.textContent =
+            "> CORRECT. Proceeding...";
+
+        feedback.className =
+            "quiz-feedback correct";
+
+        setTimeout(function () {
+
+            showScreen("question2");
+
+        }, 700);
+
+    } else {
+
+        feedback.textContent =
+            "> INCORRECT. Try again, genius.";
+
+        feedback.className =
+            "quiz-feedback incorrect";
+
+    }
+
 }
+
+
+// ========================================
+// QUESTION 2
+// ========================================
 
 function answerQuestion2(answer) {
-    alert("FRAGE 2 funktioniert! Antwort: " + answer);
+
+    const feedback =
+        document.getElementById("question2Feedback");
+
+    question2Answer =
+        answer ? "C" : "INCORRECT";
+
+
+    if (answer) {
+
+        feedback.textContent =
+            "> CORRECT. Compatibility confirmed.";
+
+        feedback.className =
+            "quiz-feedback correct";
+
+        setTimeout(function () {
+
+            showScreen("passedScreen");
+
+        }, 800);
+
+    } else {
+
+        feedback.textContent =
+            "> INCORRECT. Think harder.";
+
+        feedback.className =
+            "quiz-feedback incorrect";
+
+    }
+
 }
+
+
+// ========================================
+// SHOW SIDEQUESTS
+// ========================================
 
 function showSidequests() {
-    alert("ACCESS SIDEQUESTS funktioniert!");
+
+    showScreen("sidequestScreen");
+
 }
 
+
+// ========================================
+// CHOOSE SIDEQUEST
+// ========================================
+
 function chooseActivity(activity) {
-    alert("SIDEQUEST funktioniert: " + activity);
+
+    selectedSidequest = activity;
+
+    const selectedActivityElement =
+        document.getElementById("selectedActivity");
+
+    if (selectedActivityElement) {
+
+        selectedActivityElement.textContent =
+            activity;
+
+    }
+
+    showScreen("resultScreen");
+
 }
 ```
