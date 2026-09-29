@@ -1,1 +1,258 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Sidequest-Buddy</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="game-screen">
+
+        <section class="card">
+
+            <!-- ========================================
+                 START / HAUPTSEITE
+            ========================================= -->
+
+            <div id="mainChoices">
+
+                <div class="quest-icon">
+                    ⚔️
+                </div>
+
+                <div class="eyebrow">
+                    INCOMING QUEST
+                </div>
+
+                <h1>
+                    SIDEQUEST
+                </h1>
+
+                <p class="intro">
+                    Hey <span id="guestName">Sidequest-Buddy</span>!
+                </p>
+
+                <p class="description">
+                    Eine besondere Mission wartet auf dich.
+                    Bist du bereit, dich deiner nächsten Sidequest zu stellen?
+                </p>
+
+                <div class="quest-box">
+
+                    <span class="quest-label">
+                        QUEST
+                    </span>
+
+                    <strong>
+                        Ein unvergessliches Abenteuer
+                    </strong>
+
+                </div>
+
+                <div class="choices">
+
+                    <button
+                        class="choice yes"
+                        onclick="acceptQuest()"
+                    >
+                        <span>⚔️</span>
+                        Quest annehmen
+                    </button>
+
+                    <button
+                        class="choice no"
+                        onclick="rejectQuest()"
+                    >
+                        <span>🛡️</span>
+                        Quest ablehnen
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================
+                 JA - QUEST ANGENOMMEN
+            ========================================= -->
+
+            <div id="yesScreen" class="hidden">
+
+                <div class="success-icon">
+                    🎉
+                </div>
+
+                <div class="eyebrow">
+                    QUEST ACCEPTED
+                </div>
+
+                <h2>
+                    Sehr gute Entscheidung!
+                </h2>
+
+                <p class="description">
+                    Deine nächste Sidequest wartet bereits.
+                    Aber zuerst musst du dich für deinen Weg entscheiden.
+                </p>
+
+                <div class="activity-list">
+
+                    <button onclick="chooseActivity('🍕 Pizza & Abenteuer')">
+
+                        <span>🍕</span>
+
+                        <div>
+                            <strong>
+                                Pizza & Abenteuer
+                            </strong>
+
+                            <small>
+                                Essen, quatschen & losziehen
+                            </small>
+                        </div>
+
+                    </button>
+
+
+                    <button onclick="chooseActivity('🎲 Spieleabend')">
+
+                        <span>🎲</span>
+
+                        <div>
+                            <strong>
+                                Spieleabend
+                            </strong>
+
+                            <small>
+                                Würfel, Karten & Chaos
+                            </small>
+                        </div>
+
+                    </button>
+
+
+                    <button onclick="chooseActivity('🌲 Outdoor-Abenteuer')">
+
+                        <span>🌲</span>
+
+                        <div>
+                            <strong>
+                                Outdoor-Abenteuer
+                            </strong>
+
+                            <small>
+                                Rausgehen & etwas erleben
+                            </small>
+                        </div>
+
+                    </button>
+
+
+                    <button onclick="chooseActivity('🍹 Drinks & gute Gespräche')">
+
+                        <span>🍹</span>
+
+                        <div>
+                            <strong>
+                                Drinks & gute Gespräche
+                            </strong>
+
+                            <small>
+                                Entspannt zusammensitzen
+                            </small>
+                        </div>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ========================================
+                 NEIN - QUEST ABGELEHNT
+            ========================================= -->
+
+            <div id="noScreen" class="hidden">
+
+                <div class="failure-icon">
+                    😱
+                </div>
+
+                <div class="eyebrow">
+                    QUEST DECLINED
+                </div>
+
+                <h2>
+                    Bist du dir sicher?
+                </h2>
+
+                <p class="description">
+                    Diese Quest könnte seltene Belohnungen,
+                    gute Geschichten und einen legendären Abend enthalten.
+                </p>
+
+                <button
+                    class="retry-button"
+                    onclick="resetQuest()"
+                >
+                    🔄 Noch einmal überlegen
+                </button>
+
+            </div>
+
+
+            <!-- ========================================
+                 ERGEBNIS
+            ========================================= -->
+
+            <div id="resultScreen" class="hidden">
+
+                <div class="success-icon">
+                    🏆
+                </div>
+
+                <div class="eyebrow">
+                    SIDEQUEST LOCKED IN
+                </div>
+
+                <h2>
+                    Quest ausgewählt!
+                </h2>
+
+                <p class="description">
+                    Deine gewählte Sidequest:
+                </p>
+
+                <div class="selected-activity">
+
+                    <span id="selectedActivity"></span>
+
+                </div>
+
+                <p class="small-text">
+                    Weitere Informationen zur Quest folgen...
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <footer>
+            SIDEQUEST BUDDY
+        </footer>
+
+    </main>
+
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+</html>
