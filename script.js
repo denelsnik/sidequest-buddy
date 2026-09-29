@@ -247,55 +247,14 @@ function chooseActivity(activity) {
 
 async function saveResponse() {
 
-    const data = {
+    console.log("Google Sheets would receive:", {
 
         name: guestName,
-
         decision: decision,
-
         question1: question1Answer,
-
         question2: question2Answer,
-
         sidequest: selectedSidequest
 
-    };
-
-
-    console.log(
-        "Sending response:",
-        data
-    );
-
-
-    try {
-
-        await fetch(GOOGLE_SCRIPT_URL, {
-
-            method: "POST",
-
-            mode: "no-cors",
-
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8"
-            },
-
-            body: JSON.stringify(data)
-
-        });
-
-        console.log(
-            "Response sent to Google Sheets."
-        );
-
-    } catch (error) {
-
-        console.error(
-            "Google Sheets error:",
-            error
-        );
-
-    }
+    });
 
 }
-```
