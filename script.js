@@ -128,8 +128,6 @@ function answerQuestion1(answer) {
     const feedback =
         document.getElementById("question1Feedback");
 
-
-    // Save the actual answer
     question1Answer =
         answer ? "C" : "INCORRECT";
 
@@ -170,8 +168,6 @@ function answerQuestion2(answer) {
     const feedback =
         document.getElementById("question2Feedback");
 
-
-    // Save the actual answer
     question2Answer =
         answer ? "C" : "INCORRECT";
 
@@ -235,7 +231,7 @@ function chooseActivity(activity) {
     saveResponse();
 
 
-    // Show final screen
+    // Show final screen immediately
     showScreen("resultScreen");
 
 }
@@ -247,14 +243,50 @@ function chooseActivity(activity) {
 
 async function saveResponse() {
 
-    console.log("Google Sheets would receive:", {
+    const data = {
 
         name: guestName,
+
         decision: decision,
+
         question1: question1Answer,
+
         question2: question2Answer,
+
         sidequest: selectedSidequest
 
-    });
+    };
+
+
+    console.log("Sending response:", data);
+
+
+    try {
+
+        await fetch(GOOGLE_SCRIPT_URL, {
+
+            method: "POST",
+
+            mode: "no-cors",
+
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8"
+            },
+
+            body: JSON.stringify(data)
+
+        });
+
+        console.log("Response sent to Google Sheets.");
+
+    } catch (error) {
+
+        console.error(
+            "Could not send response to Google Sheets:",
+            error
+        );
+
+    }
 
 }
+```
