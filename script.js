@@ -7,10 +7,10 @@
 // Namen aus der URL auslesen
 const params = new URLSearchParams(window.location.search);
 
-const guestName = params.get("name") || "Sidequest-Buddy";
+const guestName = params.get("name") || "Nerd";
 
 
-// Namen auf der Seite anzeigen
+// Namen anzeigen
 document.getElementById("guestName").textContent = guestName;
 
 
@@ -27,12 +27,11 @@ function acceptQuest() {
     document
         .getElementById("yesScreen")
         .classList.remove("hidden");
-
 }
 
 
 // ========================================
-// NEIN - QUEST ABLEHNEN
+// NEIN - FALSCHE ANTWORT
 // ========================================
 
 function rejectQuest() {
@@ -44,12 +43,11 @@ function rejectQuest() {
     document
         .getElementById("noScreen")
         .classList.remove("hidden");
-
 }
 
 
 // ========================================
-// NOCHMAL ÜBERLEGEN
+// TRY AGAIN
 // ========================================
 
 function resetQuest() {
@@ -61,7 +59,6 @@ function resetQuest() {
     document
         .getElementById("mainChoices")
         .classList.remove("hidden");
-
 }
 
 
@@ -82,5 +79,4 @@ function chooseActivity(activity) {
     document
         .getElementById("resultScreen")
         .classList.remove("hidden");
-
 }
