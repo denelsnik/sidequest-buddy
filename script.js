@@ -1,4 +1,6 @@
 ```javascript
+// TEST - SIDEQUEST BUDDY
+
 alert("SCRIPT.JS WIRD GELADEN!");
 
 function acceptQuest() {
