@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +17,7 @@
 
         <!-- ========================================
              START
-        ========================================= -->
+        ======================================== -->
 
         <div id="mainChoices">
 
@@ -34,42 +34,92 @@
             </h1>
 
             <p class="intro">
-                Hey <span id="guestName">Nerd</span>!
+                Hey <span id="guestName">Alexandru</span>!
             </p>
 
             <p class="description">
-                Ich habe eine wichtige Quest für dich.
-                Will you be my Sidequest-Buddy this October?
+                Before you can accept this quest,
+                you must pass a highly sophisticated
+                compatibility test.
             </p>
 
             <div class="quest-box">
 
                 <span class="quest-label">
-                    QUEST OBJECTIVE
+                    REQUIREMENT
                 </span>
 
                 <strong>
-                    Einen legendären Oktober erleben.
+                    Maximum nerdiness.
                 </strong>
 
             </div>
 
-            <div class="choices">
+            <button
+                class="ready-button"
+                onclick="startQuiz()"
+            >
+                ⚔️ I'M READY
+            </button>
 
-                <button
-                    class="choice yes"
-                    onclick="acceptQuest()"
-                >
-                    <span>⚔️</span>
-                    YES
+        </div>
+
+
+        <!-- ========================================
+             QUESTION 1
+        ======================================== -->
+
+        <div id="quizOne" class="hidden">
+
+            <div class="quest-icon">
+                🧠
+            </div>
+
+            <div class="eyebrow">
+                QUEST 01
+            </div>
+
+            <h2>
+                Party Composition
+            </h2>
+
+            <p class="description">
+                A legendary sidequest requires two players.
+                Your party currently has:
+            </p>
+
+            <div class="quest-box party-box">
+
+                <strong>
+                    ⚔️ Player 1: You
+                </strong>
+
+                <strong>
+                    ❓ Player 2: ???
+                </strong>
+
+            </div>
+
+            <p class="description">
+                Who is missing?
+            </p>
+
+            <div class="quiz-options">
+
+                <button onclick="wrongAnswer(1)">
+                    A) A healer 🧙
                 </button>
 
-                <button
-                    class="choice no"
-                    onclick="rejectQuest()"
-                >
-                    <span>💀</span>
-                    NO
+                <button onclick="wrongAnswer(1)">
+                    B) A tank 🛡️
+                </button>
+
+                <button onclick="correctAnswer(1)">
+                    C) A Sidequest-Buddy ⚔️
+                </button>
+
+                <button onclick="wrongAnswer(1)">
+                    D) Nobody. I can suffer alone. 💀
                 </button>
 
             </div>
@@ -78,8 +128,93 @@
 
 
         <!-- ========================================
-             JA
-        ========================================= -->
+             QUESTION 2
+        ======================================== -->
+
+        <div id="quizTwo" class="hidden">
+
+            <div class="quest-icon">
+                🏔️
+            </div>
+
+            <div class="eyebrow">
+                QUEST 02
+            </div>
+
+            <h2>
+                Choose Your Fate
+            </h2>
+
+            <p class="description">
+                You have one free weekend in October.
+                What sounds like the most reasonable option?
+            </p>
+
+            <div class="quiz-options">
+
+                <button onclick="wrongAnswer(2)">
+                    A) Stay home. 🛋️
+                </button>
+
+                <button onclick="wrongAnswer(2)">
+                    B) Sleep in a perfectly normal bed. 🛏️
+                </button>
+
+                <button onclick="correctAnswer(2)">
+                    C) Go on an adventure and sleep in a car. 🚗
+                </button>
+
+                <button onclick="wrongAnswer(2)">
+                    D) Make responsible adult decisions. 📋
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- ========================================
+             WRONG ANSWER
+        ======================================== -->
+
+        <div id="wrongScreen" class="hidden">
+
+            <div class="failure-icon">
+                💀
+            </div>
+
+            <div class="eyebrow">
+                QUEST ERROR
+            </div>
+
+            <h2>
+                INCORRECT.
+            </h2>
+
+            <p class="description asshole">
+                That answer is suspicious.
+            </p>
+
+            <p class="description">
+                Your Sidequest-Buddy application
+                has not been rejected...
+                <br><br>
+                <strong>yet.</strong>
+            </p>
+
+            <button
+                class="retry-button"
+                onclick="retryQuestion()"
+            >
+                🔄 TRY AGAIN
+            </button>
+
+        </div>
+
+
+        <!-- ========================================
+             SIDEQUEST SELECTION
+        ======================================== -->
 
         <div id="yesScreen" class="hidden">
 
@@ -96,57 +231,61 @@
             </h2>
 
             <p class="description">
-                Dann wähle deine Sidequest.
-                Jede beinhaltet Abenteuer, Chaos und eine Übernachtung im Auto.
+                Compatibility test passed.
+                Your party is now officially assembled.
+            </p>
+
+            <p class="description">
+                Choose your sidequest:
             </p>
 
             <div class="activity-list">
 
-                <button onclick="chooseActivity('🧗 Hochseilgarten')">
+                <button onclick="chooseActivity('🧗 High Ropes Course')">
 
                     <span>🧗</span>
 
                     <div>
                         <strong>
-                            Hochseilgarten
+                            High Ropes Course
                         </strong>
 
                         <small>
-                            Klettern, Höhenangst & Übernachtung im Auto
+                            Climbing, heights & sleeping in the car
                         </small>
                     </div>
 
                 </button>
 
 
-                <button onclick="chooseActivity('⛰️ Klettersteig')">
+                <button onclick="chooseActivity('⛰️ Via Ferrata')">
 
                     <span>⛰️</span>
 
                     <div>
                         <strong>
-                            Klettersteig
+                            Via Ferrata
                         </strong>
 
                         <small>
-                            Fels, Adrenalin & Übernachtung im Auto
+                            Rock, adrenaline & sleeping in the car
                         </small>
                     </div>
 
                 </button>
 
 
-                <button onclick="chooseActivity('🛒 Mountaincart-Tour')">
+                <button onclick="chooseActivity('🛒 Mountain Cart Tour')">
 
                     <span>🛒</span>
 
                     <div>
                         <strong>
-                            Mountaincart-Tour
+                            Mountain Cart Tour
                         </strong>
 
                         <small>
-                            Berg runter & Übernachtung im Auto
+                            Racing downhill & sleeping in the car
                         </small>
                     </div>
 
@@ -158,40 +297,8 @@
 
 
         <!-- ========================================
-             NEIN
-        ========================================= -->
-
-        <div id="noScreen" class="hidden">
-
-            <div class="failure-icon">
-                💀
-            </div>
-
-            <div class="eyebrow">
-                QUEST ERROR
-            </div>
-
-            <h2>
-                WRONG ANSWER.
-            </h2>
-
-            <p class="description asshole">
-                TRY AGAIN, ASSHOLE.
-            </p>
-
-            <button
-                class="retry-button"
-                onclick="resetQuest()"
-            >
-                🔄 TRY AGAIN
-            </button>
-
-        </div>
-
-
-        <!-- ========================================
-             AUSWAHL GETROFFEN
-        ========================================= -->
+             FINAL RESULT
+        ======================================== -->
 
         <div id="resultScreen" class="hidden">
 
@@ -208,7 +315,7 @@
             </h2>
 
             <p class="description">
-                Du hast dich entschieden für:
+                Your chosen sidequest:
             </p>
 
             <div class="selected-activity">
@@ -216,11 +323,12 @@
             </div>
 
             <p class="description">
-                Pack deine Sachen. Wir schlafen im Auto. 🚗
+                Pack your stuff.
+                We're sleeping in the car. 🚗
             </p>
 
             <p class="small-text">
-                Weitere Quest-Details folgen...
+                More quest details coming soon...
             </p>
 
         </div>
