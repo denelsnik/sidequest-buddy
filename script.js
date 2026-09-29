@@ -1,47 +1,86 @@
 // ========================================
 // SIDEQUEST BUDDY
-// Interaktive Einladung
+// Interactive Invitation
 // ========================================
 
 
-// Namen aus der URL auslesen
-const params = new URLSearchParams(window.location.search);
-
-const guestName = params.get("name") || "Nerd";
+// Guest name
+const guestName = "Alexandru";
 
 
-// Namen anzeigen
+// Display guest name
 document.getElementById("guestName").textContent = guestName;
 
 
+// Keep track of the current question
+let currentQuestion = 1;
+
+
 // ========================================
-// JA - QUEST ANNEHMEN
+// START QUIZ
 // ========================================
 
-function acceptQuest() {
+function startQuiz() {
 
     document
         .getElementById("mainChoices")
         .classList.add("hidden");
 
     document
-        .getElementById("yesScreen")
+        .getElementById("quizOne")
         .classList.remove("hidden");
 }
 
 
 // ========================================
-// NEIN - FALSCHE ANTWORT
+// CORRECT ANSWER
 // ========================================
 
-function rejectQuest() {
+function correctAnswer(question) {
+
+    if (question === 1) {
+
+        document
+            .getElementById("quizOne")
+            .classList.add("hidden");
+
+        document
+            .getElementById("quizTwo")
+            .classList.remove("hidden");
+
+        currentQuestion = 2;
+
+    } else if (question === 2) {
+
+        document
+            .getElementById("quizTwo")
+            .classList.add("hidden");
+
+        document
+            .getElementById("yesScreen")
+            .classList.remove("hidden");
+    }
+}
+
+
+// ========================================
+// WRONG ANSWER
+// ========================================
+
+function wrongAnswer(question) {
+
+    currentQuestion = question;
 
     document
-        .getElementById("mainChoices")
+        .getElementById("quizOne")
         .classList.add("hidden");
 
     document
-        .getElementById("noScreen")
+        .getElementById("quizTwo")
+        .classList.add("hidden");
+
+    document
+        .getElementById("wrongScreen")
         .classList.remove("hidden");
 }
 
@@ -50,20 +89,29 @@ function rejectQuest() {
 // TRY AGAIN
 // ========================================
 
-function resetQuest() {
+function retryQuestion() {
 
     document
-        .getElementById("noScreen")
+        .getElementById("wrongScreen")
         .classList.add("hidden");
 
-    document
-        .getElementById("mainChoices")
-        .classList.remove("hidden");
+    if (currentQuestion === 1) {
+
+        document
+            .getElementById("quizOne")
+            .classList.remove("hidden");
+
+    } else {
+
+        document
+            .getElementById("quizTwo")
+            .classList.remove("hidden");
+    }
 }
 
 
 // ========================================
-// SIDEQUEST AUSWÄHLEN
+// CHOOSE SIDEQUEST
 // ========================================
 
 function chooseActivity(activity) {
