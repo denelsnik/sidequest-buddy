@@ -4,16 +4,64 @@
 // ========================================
 
 
-// Guest name
+// ========================================
+// PLAYER
+// ========================================
+
 const guestName = "Alexandru";
 
-
-// Display guest name
 document.getElementById("guestName").textContent = guestName;
 
 
-// Keep track of the current question
-let currentQuestion = 1;
+// ========================================
+// SCREEN HELPER
+// ========================================
+
+function showScreen(screenId) {
+
+    const screens = document.querySelectorAll(".screen");
+
+    screens.forEach(screen => {
+        screen.classList.add("hidden");
+    });
+
+    document
+        .getElementById(screenId)
+        .classList.remove("hidden");
+}
+
+
+// ========================================
+// START QUEST
+// ========================================
+
+function acceptQuest() {
+
+    showScreen("yesScreen");
+
+}
+
+
+// ========================================
+// DECLINE QUEST
+// ========================================
+
+function rejectQuest() {
+
+    showScreen("noScreen");
+
+}
+
+
+// ========================================
+// TRY AGAIN
+// ========================================
+
+function resetQuest() {
+
+    showScreen("mainChoices");
+
+}
 
 
 // ========================================
@@ -22,91 +70,93 @@ let currentQuestion = 1;
 
 function startQuiz() {
 
-    document
-        .getElementById("mainChoices")
-        .classList.add("hidden");
+    showScreen("question1");
 
-    document
-        .getElementById("quizOne")
-        .classList.remove("hidden");
 }
 
 
 // ========================================
-// CORRECT ANSWER
+// QUESTION 1
 // ========================================
 
-function correctAnswer(question) {
+function answerQuestion1(correct) {
 
-    if (question === 1) {
-
-        document
-            .getElementById("quizOne")
-            .classList.add("hidden");
-
-        document
-            .getElementById("quizTwo")
-            .classList.remove("hidden");
-
-        currentQuestion = 2;
-
-    } else if (question === 2) {
-
-        document
-            .getElementById("quizTwo")
-            .classList.add("hidden");
-
-        document
-            .getElementById("yesScreen")
-            .classList.remove("hidden");
-    }
-}
+    const feedback =
+        document.getElementById("question1Feedback");
 
 
-// ========================================
-// WRONG ANSWER
-// ========================================
+    if (correct) {
 
-function wrongAnswer(question) {
+        feedback.textContent =
+            "> CORRECT. Proceeding...";
 
-    currentQuestion = question;
+        feedback.className =
+            "quiz-feedback correct";
 
-    document
-        .getElementById("quizOne")
-        .classList.add("hidden");
+        setTimeout(() => {
 
-    document
-        .getElementById("quizTwo")
-        .classList.add("hidden");
+            showScreen("question2");
 
-    document
-        .getElementById("wrongScreen")
-        .classList.remove("hidden");
-}
-
-
-// ========================================
-// TRY AGAIN
-// ========================================
-
-function retryQuestion() {
-
-    document
-        .getElementById("wrongScreen")
-        .classList.add("hidden");
-
-    if (currentQuestion === 1) {
-
-        document
-            .getElementById("quizOne")
-            .classList.remove("hidden");
+        }, 700);
 
     } else {
 
-        document
-            .getElementById("quizTwo")
-            .classList.remove("hidden");
+        feedback.textContent =
+            "> INCORRECT. Try again, genius.";
+
+        feedback.className =
+            "quiz-feedback incorrect";
+
     }
+
+}
+
+
+// ========================================
+// QUESTION 2
+// ========================================
+
+function answerQuestion2(correct) {
+
+    const feedback =
+        document.getElementById("question2Feedback");
+
+
+    if (correct) {
+
+        feedback.textContent =
+            "> CORRECT. Compatibility confirmed.";
+
+        feedback.className =
+            "quiz-feedback correct";
+
+        setTimeout(() => {
+
+            showScreen("passedScreen");
+
+        }, 800);
+
+    } else {
+
+        feedback.textContent =
+            "> INCORRECT. Think harder.";
+
+        feedback.className =
+            "quiz-feedback incorrect";
+
+    }
+
+}
+
+
+// ========================================
+// SHOW SIDEQUESTS
+// ========================================
+
+function showSidequests() {
+
+    showScreen("sidequestScreen");
+
 }
 
 
@@ -116,15 +166,10 @@ function retryQuestion() {
 
 function chooseActivity(activity) {
 
-    document
-        .getElementById("yesScreen")
-        .classList.add("hidden");
+    document.getElementById(
+        "selectedActivity"
+    ).textContent = activity;
 
-    document
-        .getElementById("selectedActivity")
-        .textContent = activity;
+    showScreen("resultScreen");
 
-    document
-        .getElementById("resultScreen")
-        .classList.remove("hidden");
 }
