@@ -19,8 +19,6 @@ const GOOGLE_SCRIPT_URL =
 
 const guestName = "Alexandru";
 
-document.getElementById("guestName").textContent = guestName;
-
 
 // ========================================
 // TRACKING DATA
@@ -33,6 +31,21 @@ let selectedSidequest = "";
 
 
 // ========================================
+// INITIALIZE
+// ========================================
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const guestElement = document.getElementById("guestName");
+
+    if (guestElement) {
+        guestElement.textContent = guestName;
+    }
+
+});
+
+
+// ========================================
 // SCREEN HELPER
 // ========================================
 
@@ -40,13 +53,16 @@ function showScreen(screenId) {
 
     const screens = document.querySelectorAll(".screen");
 
-    screens.forEach(screen => {
+    screens.forEach(function (screen) {
         screen.classList.add("hidden");
     });
 
-    document
-        .getElementById(screenId)
-        .classList.remove("hidden");
+    const targetScreen = document.getElementById(screenId);
+
+    if (targetScreen) {
+        targetScreen.classList.remove("hidden");
+    }
+
 }
 
 
@@ -83,7 +99,6 @@ function rejectQuest() {
 function resetQuest() {
 
     decision = "";
-
     question1Answer = "";
     question2Answer = "";
     selectedSidequest = "";
@@ -108,19 +123,18 @@ function startQuiz() {
 // QUESTION 1
 // ========================================
 
-function answerQuestion1(correct) {
+function answerQuestion1(answer) {
 
     const feedback =
         document.getElementById("question1Feedback");
 
 
-    // Store the answer
-    question1Answer = correct
-        ? "CORRECT"
-        : "INCORRECT";
+    // Save the actual answer
+    question1Answer =
+        answer ? "C" : "INCORRECT";
 
 
-    if (correct) {
+    if (answer) {
 
         feedback.textContent =
             "> CORRECT. Proceeding...";
@@ -128,7 +142,7 @@ function answerQuestion1(correct) {
         feedback.className =
             "quiz-feedback correct";
 
-        setTimeout(() => {
+        setTimeout(function () {
 
             showScreen("question2");
 
@@ -151,19 +165,18 @@ function answerQuestion1(correct) {
 // QUESTION 2
 // ========================================
 
-function answerQuestion2(correct) {
+function answerQuestion2(answer) {
 
     const feedback =
         document.getElementById("question2Feedback");
 
 
-    // Store the answer
-    question2Answer = correct
-        ? "CORRECT"
-        : "INCORRECT";
+    // Save the actual answer
+    question2Answer =
+        answer ? "C" : "INCORRECT";
 
 
-    if (correct) {
+    if (answer) {
 
         feedback.textContent =
             "> CORRECT. Compatibility confirmed.";
@@ -171,7 +184,7 @@ function answerQuestion2(correct) {
         feedback.className =
             "quiz-feedback correct";
 
-        setTimeout(() => {
+        setTimeout(function () {
 
             showScreen("passedScreen");
 
@@ -209,14 +222,20 @@ function chooseActivity(activity) {
 
     selectedSidequest = activity;
 
-    document.getElementById(
-        "selectedActivity"
-    ).textContent = activity;
+    const selectedActivityElement =
+        document.getElementById("selectedActivity");
 
-    // Save everything only now
-    // when a Sidequest has actually been selected.
+    if (selectedActivityElement) {
+        selectedActivityElement.textContent = activity;
+    }
+
+
+    // Save to Google Sheets
+    // ONLY after a Sidequest has been selected.
     saveResponse();
 
+
+    // Show final screen
     showScreen("resultScreen");
 
 }
@@ -243,6 +262,12 @@ async function saveResponse() {
     };
 
 
+    console.log(
+        "Sending response:",
+        data
+    );
+
+
     try {
 
         await fetch(GOOGLE_SCRIPT_URL, {
@@ -252,7 +277,7 @@ async function saveResponse() {
             mode: "no-cors",
 
             headers: {
-                "Content-Type": "text/plain"
+                "Content-Type": "text/plain;charset=utf-8"
             },
 
             body: JSON.stringify(data)
@@ -260,13 +285,13 @@ async function saveResponse() {
         });
 
         console.log(
-            "Sidequest response saved."
+            "Response sent to Google Sheets."
         );
 
     } catch (error) {
 
         console.error(
-            "Could not save response:",
+            "Google Sheets error:",
             error
         );
 
