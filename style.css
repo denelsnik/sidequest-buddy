@@ -244,3 +244,13 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+.asshole {
+    color: var(--red);
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#resultScreen .selected-activity {
+    font-size: 20px;
+}
